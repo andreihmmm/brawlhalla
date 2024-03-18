@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+}
+
+#main {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    align-items: end;
+    justify-content: center;
+    background-image: url("imagens/background.webp");
+}
+
+#personagens {
+    position: relative;
+    display: flex;
+
+    bottom: -25%;
+}
+
+.personagem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secaoImagem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -40%;
+}
+
+.fotoPersonagem {
+    max-height: 250px;
+}
+
+.podio {
+    height: 500px;
+    width: auto;
+}
+
+.secaoNome {
+    position: absolute;
+    top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.namePlate {
+    width: 80%;
+}
+
+.inputNome {
+    position: absolute;
+    font-size: xx-large;
+    font-weight: 900;
+    color: white;
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+}
+
+.secaoDados {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+}
+
+.iconeStat {
+    height: 24px;
+    border-radius: 5px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    justify-content: space-between;
+    /* background-color: chartreuse; */
+}
+
+.campo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.imagemzinha {
+    width: 130px;
+}
+
+.barrinha {
+    position: absolute;
+    width: 143px;
+    right: 0px;
+    opacity: 0;
+}
+
+.armas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.arma {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+}
+
+.arma img {
+    height: 46px;
+    border-radius: 5px;
+}
+
+.a1 {
+    padding-bottom: 5px;
+}
+
+.trocarImagem {
+    background-color: greenyellow;
+    padding: 4px;
+}
+
+.selecionarArmas {
+    position: absolute;
+    left: 300px;
+    width: 300px;
+    height: 300px;
+    background-image: url("imagens/weaponsplate.png");
+    background-size: contain;
+    /* Ensure the entire background image fits within the div */
+    background-repeat: no-repeat;
+    /* Prevent the background image from repeating */
+    background-position: center;
+    /* Center the background image */
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.opcao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+.aberto {
+    display: flex;
+}
+
+.fechado {
+    display: none;
+}
+
+.arma:hover {
+    cursor: pointer;
+}
+
+.x img:hover {
+    cursor: pointer;
+}
+
+.opcao:hover {
+    cursor: pointer;
+}
