@@ -1,38 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Your JavaScript code here
-    inputForca = document.querySelector(".force .barrinha")
-    inputDext = document.querySelector(".dext .barrinha")
-    inputDefesa = document.querySelector(".defense .barrinha")
-    inputVelocidade = document.querySelector(".speed .barrinha")
-    var imagemForca = document.querySelector("img.forca")
-    var imagemDestreza = document.querySelector("img.destreza")
-    var imagemDefesa = document.querySelector("img.defesa")
-    var imagemVelocidade = document.querySelector("img.velocidade")
-
-    inputForca.addEventListener("input", function () {
-        var valor = inputForca.value
-        imagemForca.src = "imagens/stat_bar/" + valor + ".png";
+    var inputForca = document.querySelectorAll(".force .barrinha");
+    var inputDext = document.querySelectorAll(".dext .barrinha");
+    var inputDefesa = document.querySelectorAll(".defense .barrinha");
+    var inputVelocidade = document.querySelectorAll(".speed .barrinha");
+    var imagemForca = document.querySelectorAll("img.forca");
+    var imagemDestreza = document.querySelectorAll("img.destreza");
+    var imagemDefesa = document.querySelectorAll("img.defesa");
+    var imagemVelocidade = document.querySelectorAll("img.velocidade");
+    
+    // Define an array containing pairs of input and image elements
+    var statPairs = [
+        { inputs: inputForca, images: imagemForca },
+        { inputs: inputDext, images: imagemDestreza },
+        { inputs: inputDefesa, images: imagemDefesa },
+        { inputs: inputVelocidade, images: imagemVelocidade }
+    ];
+    
+    // Loop through each pair and attach the event listener
+    statPairs.forEach(function(pair) {
+        pair.inputs.forEach(function(input, index) {
+            input.addEventListener("input", function() {
+                var valor = input.value;
+                pair.images[index].src = "imagens/stat_bar/" + valor + ".png";
+            });
+        });
     });
-    inputDext.addEventListener("input", function () {
-        var valor = inputDext.value
-        imagemDestreza.src = "imagens/stat_bar/" + valor + ".png";
-    });
-    inputDefesa.addEventListener("input", function () {
-        var valor = inputDefesa.value
-        imagemDefesa.src = "imagens/stat_bar/" + valor + ".png";
-    });
-    inputVelocidade.addEventListener("input", function () {
-        var valor = inputVelocidade.value
-        imagemVelocidade.src = "imagens/stat_bar/" + valor + ".png";
-    });
+    
 
     console.log("DOM loaded");
 
     //// ABRIR SELEÇAO DE ARMA
     var selecao = document.querySelector(".selecionarArmas");
 
-    var arma1 = document.querySelector(".a1");
-    var arma2 = document.querySelector(".a2");
+    var arma1 = document.querySelectorAll(".a1");
+    var arma2 = document.querySelectorAll(".a2");
     var botaoFechar = document.querySelector(".x img")
 
     function abrirFecharSelecao(event) {
@@ -68,8 +70,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    arma1.addEventListener('click', abrirFecharSelecao);
-    arma2.addEventListener('click', abrirFecharSelecao);
+    arma1.forEach(function(arma) {
+        arma.addEventListener('click', abrirFecharSelecao);
+    });
+    arma2.forEach(function(arma) {
+        arma.addEventListener('click', abrirFecharSelecao);
+    });
     botaoFechar.addEventListener('click', abrirFecharSelecao)
 
     //// TROCAR IMAGEM DA ARMA
@@ -91,17 +97,47 @@ document.addEventListener("DOMContentLoaded", function () {
     //// ESCOLHER PERSONAGENS
 
     var personagens = document.querySelectorAll(".personagem");
-    var proximo = document.querySelector(".next")
-    var anterior = document.querySelector(".prev")
-
+    var proximo = document.querySelector("#setinhaProximo")
+    var anterior = document.querySelector("#setinhaAnterior")
     let ativo = 1;
 
     function carregarExibicao(){
+
+        selecao.classList.remove("aberto");
+        selecao.classList.add("fechado");
+        if(document.querySelector(".trocarImagem") != null) {
+            document.querySelector(".trocarImagem").classList.remove("trocarImagem")
+        }
+
         let stt = 0;
+        personagens[ativo].style.transform = `none`
+        personagens[ativo].style.zIndex = 1;
+        personagens[ativo].style.filter = 'none'
+
         for (var i = ativo+1;i < personagens.length;i++) {
             stt++;
-            personagens[i].style.transform = 'translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)'
+            personagens[i].style.transform = `translateX(${400*stt}px) translateY(${100*stt}px)  scale(${1 - 0.1*stt}) perspective(16px)`
+            personagens[i].style.zIndex = -stt;
+            personagens[i].style.filter = 'blur(1px)'
+        }
+
+        stt = 0;
+
+        for (var i = ativo - 1;i >= 0; i--) {
+            stt++;
+            personagens[i].style.transform = `translateX(${-400*stt}px) translateY(${100*stt}px)  scale(${1 - 0.1*stt}) perspective(16px)`
+            personagens[i].style.zIndex = -stt;
+            personagens[i].style.filter = 'blur(1px)'
         }
     }
     carregarExibicao();
+    
+    proximo.onclick = function() {
+        ativo = ativo + 1 < personagens.length ? ativo + 1 : ativo;
+        carregarExibicao(); // Call carregarExibicao again to update the display
+    }
+    anterior.onclick = function() {
+        ativo = ativo - 1 < personagens.length ? ativo - 1 : ativo;
+        carregarExibicao(); // Call carregarExibicao again to update the display
+    }
 })
