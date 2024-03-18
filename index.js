@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     arma2.addEventListener('click', abrirFecharSelecao);
     botaoFechar.addEventListener('click', abrirFecharSelecao)
 
-    //// TROCAR IMAGEM 
+    //// TROCAR IMAGEM DA ARMA
     var opcoes = document.querySelectorAll('.opcao');
 
     opcoes.forEach(function (opcao) {
@@ -86,4 +86,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         selecionado.src = imgElement.src
     }
+
+
+    //// ESCOLHER PERSONAGENS
+
+    var personagens = document.querySelectorAll(".personagem");
+    var proximo = document.querySelector(".next")
+    var anterior = document.querySelector(".prev")
+
+    let ativo = 1;
+
+    function carregarExibicao(){
+        let stt = 0;
+        for (var i = ativo+1;i < personagens.length;i++) {
+            stt++;
+            personagens[i].style.transform = 'translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)'
+        }
+    }
+    carregarExibicao();
 })
